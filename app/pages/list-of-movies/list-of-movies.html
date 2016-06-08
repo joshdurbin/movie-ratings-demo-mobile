@@ -1,0 +1,30 @@
+<ion-navbar *navbar>
+  <ion-title>Movies</ion-title>
+  <ion-buttons end *ngIf="auth.authenticated()">
+    <button (click)="launchAddMovieModal()" primary>
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-navbar>
+
+<ion-content padding class="list-of-movies item-text-wrap">
+  <ion-list>
+    <ion-header>
+        <ion-searchbar (ionInput)="searchForMovie($event)" placeholder="Search..." debounce=750></ion-searchbar>
+    </ion-header>
+    <ion-item-sliding *ngFor="let movie of movies">
+
+      <button ion-item (click)="goToMovieDetail(movie)">
+        <ion-thumbnail item-left>
+          <img src="{{movie.posterImageURI}}">
+        </ion-thumbnail>
+        <h2>{{movie.name}}</h2>
+        <p>{{movie.yearReleased}}</p>
+        <p>{{movie.description}}</p>
+      </button>
+      <ion-item-options>
+        <button *ngIf="auth.authenticated()" danger (click)="delete(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

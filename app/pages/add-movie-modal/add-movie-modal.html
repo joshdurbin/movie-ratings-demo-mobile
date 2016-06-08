@@ -1,0 +1,25 @@
+<ion-toolbar>
+  <ion-title>
+    Create Movie
+  </ion-title>
+  <ion-buttons start>
+    <button (click)="dismiss()">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content padding class="add-movie-search-omdb">
+  <ion-list>
+    <ion-header>
+        <ion-searchbar (ionInput)="searchForMovie($event)" placeholder="Start by searching..." debounce=500></ion-searchbar>
+    </ion-header>
+    <ion-item *ngFor="let movie of movies" (click)="closeModalAndAddMovie(movie)">
+      <ion-thumbnail item-left>
+        <img src="{{movie.Poster}}">
+      </ion-thumbnail>
+      <h2>{{movie.Title}}</h2>
+      <h2>{{movie.Year}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>

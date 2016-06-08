@@ -1,0 +1,21 @@
+<ion-navbar *navbar>
+  <ion-title>{{movie.name}}</ion-title>
+</ion-navbar>
+
+<ion-content padding class="movie-detail">
+  <div *ngIf="resolvedMovie" class="selection">
+    <img src="{{resolvedMovie.posterImageURI}}">
+    <p>{{resolvedMovie.name}} was released in {{resolvedMovie.yearReleased}}.</p>
+    <p>{{resolvedMovie.description}}</p>
+    <div *ngIf="resolvedMovie.computedRating.totalRatings > 0">{{resolvedMovie.computedRating.totalRatings}} people have rated the '{{resolvedMovie.name}}' a {{resolvedMovie.computedRating.rating}} out of 5.</div>
+    <div *ngIf="resolvedMovie.computedRating.totalRatings == 0">'{{resolvedMovie.name}}' is not yet rated.</div>
+  </div>
+</ion-content>
+
+<ion-footer-bar *ngIf="resolvedMovie && auth.authenticated()">
+  <div class="bar bar-footer bar-balanced">
+    <button block (click)="openRatingMenu()">
+      Rate Movie
+    </button>
+  </div>
+</ion-footer-bar>
