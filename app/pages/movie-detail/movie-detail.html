@@ -11,7 +11,7 @@
     <p><strong>Staring</strong> {{movie.actors.join(', ')}}</p>
     <p><strong>Directed by</strong> {{movie.directors.join(', ')}}</p>
     <p><strong>Written by</strong> {{movie.writers.join(', ')}}</p>
-    <div *ngIf="movie.totalRatings > 0">{{movie.totalRatings}} people have rated the '{{movie.name}}' a {{movie.rating}} out of 5.</div>
+    <div *ngIf="movie.totalRatings > 0">{{movie.totalRatings}} people have rated '{{movie.name}}' with an average rating of {{movie.rating}} out of 5.</div>
     <div *ngIf="movie.totalRatings == 0">'{{movie.name}}' is not yet rated.</div>
   </div>
 </ion-content>
