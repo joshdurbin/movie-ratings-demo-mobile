@@ -3,16 +3,20 @@
 </ion-navbar>
 
 <ion-content padding class="movie-detail">
-  <div *ngIf="resolvedMovie" class="selection">
-    <img src="{{resolvedMovie.posterImageURI}}">
-    <p>{{resolvedMovie.name}} was released in {{resolvedMovie.yearReleased}}.</p>
-    <p>{{resolvedMovie.description}}</p>
-    <div *ngIf="resolvedMovie.computedRating.totalRatings > 0">{{resolvedMovie.computedRating.totalRatings}} people have rated the '{{resolvedMovie.name}}' a {{resolvedMovie.computedRating.rating}} out of 5.</div>
-    <div *ngIf="resolvedMovie.computedRating.totalRatings == 0">'{{resolvedMovie.name}}' is not yet rated.</div>
+  <div class="selection">
+    <img src="{{movie.posterImageURI}}">
+    <p>{{movie.name}} was released in {{movie.yearReleased}} and is rated {{movie.mpaaRating}}.</p>
+    <p>{{movie.description}}</p>
+    <p><strong>Awards</strong> {{movie.awards}}</p>
+    <p><strong>Staring</strong> {{movie.actors.join(', ')}}</p>
+    <p><strong>Directed by</strong> {{movie.directors.join(', ')}}</p>
+    <p><strong>Written by</strong> {{movie.writers.join(', ')}}</p>
+    <div *ngIf="movie.totalRatings > 0">{{movie.totalRatings}} people have rated the '{{movie.name}}' a {{movie.rating}} out of 5.</div>
+    <div *ngIf="movie.totalRatings == 0">'{{movie.name}}' is not yet rated.</div>
   </div>
 </ion-content>
 
-<ion-footer-bar *ngIf="resolvedMovie && auth.authenticated()">
+<ion-footer-bar *ngIf="auth.authenticated()">
   <div class="bar bar-footer bar-balanced">
     <button block (click)="openRatingMenu()">
       Rate Movie

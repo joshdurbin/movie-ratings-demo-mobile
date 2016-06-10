@@ -8,7 +8,6 @@ export class MovieService {
     allMovies: any;
 
     movieSearchResults = new Collections.LinkedDictionary();
-    movieDetails = new Collections.LinkedDictionary();
 
     constructor(private http: Http) {}
 
@@ -32,27 +31,6 @@ export class MovieService {
         }
     }
 
-    getMovieDetails(id: string) {
-
-        if (this.movieDetails.containsKey(id)) {
-
-            return Promise.resolve(this.movieDetails.getValue(id));
-
-        } else {
-
-            return new Promise(resolve => {
-
-                this.http.get('https://movie-ratings-demo.herokuapp.com/api/movies/' + id)
-                    .map(res => res.json())
-                    .subscribe(data => {
-
-                        this.movieDetails.setValue(id, data);
-                        resolve(this.movieDetails.getValue(id));
-                    });
-            });
-        }
-    }
-
     searchForMovie(searchQuery: string) {
 
         let trimmedSearchQuery: String = searchQuery.trim();
@@ -69,8 +47,8 @@ export class MovieService {
                     .map(res => res.json())
                     .subscribe(data => {
 
-                        this.movieDetails.setValue(trimmedSearchQuery, data);
-                        resolve(this.movieDetails.getValue(trimmedSearchQuery));
+                        this.movieSearchResults.setValue(trimmedSearchQuery, data);
+                        resolve(this.movieSearchResults.getValue(trimmedSearchQuery));
                     });
             });
         }

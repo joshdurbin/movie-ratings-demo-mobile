@@ -10,7 +10,6 @@ import {AuthService} from "../../providers/auth-service";
 export class MovieDetailPage {
 
   movie: any;
-  resolvedMovie: any;
 
   constructor(
       private movieService: MovieService,
@@ -19,17 +18,8 @@ export class MovieDetailPage {
       public auth: AuthService
   ) {
 
+
     this.movie = this.navParams.data;
-
-    let loading = Loading.create({ content: "Loading " + this.movie.name });
-    navController.present(loading);
-    
-    movieService.getMovieDetails(this.movie.id)
-      .then(data => {
-
-        loading.dismiss();
-        this.resolvedMovie = data;
-      });
   }
 
   presentToast(messageToDisplay) {

@@ -19,12 +19,16 @@
           <img src="{{movie.posterImageURI}}">
         </ion-thumbnail>
         <h2>{{movie.name}}</h2>
-        <p>{{movie.yearReleased}}</p>
-        <p>{{movie.description}}</p>
+        <p *ngIf="movie.totalRatings > 0">Release in {{movie.yearReleased}}, {{movie.rating}} out of 5 rating</p>
+        <p *ngIf="movie.totalRatings == 0">Released in {{movie.yearReleased}}, not rated.</p>
       </button>
       <ion-item-options>
         <button *ngIf="auth.authenticated()" danger (click)="delete(item)">Delete</button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <ion-list-header *ngIf="movies == 0">
+    No Movies Found
+  </ion-list-header>
 </ion-content>
